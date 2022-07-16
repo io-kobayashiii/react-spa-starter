@@ -1,0 +1,6 @@
+FROM node:16.3.0-alpine
+
+WORKDIR /app
+
+# COPY package.json yarn.lock /app/
+# RUN yarn install
