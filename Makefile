@@ -13,3 +13,6 @@ db:
 	docker compose exec -it db bash
 destroy:
 	docker compose down --rmi all --volumes --remove-orphans
+remake:
+	@make destroy
+	@make up
