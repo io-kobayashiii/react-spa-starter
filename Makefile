@@ -1,5 +1,10 @@
 up:
 	docker compose up -d
+stop:
+	docker compose stop
+restart:
+	@make stop
+	@make up
 app:
 	docker compose exec frontend ash
 nginx:
