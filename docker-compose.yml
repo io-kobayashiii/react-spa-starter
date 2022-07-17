@@ -1,38 +1,33 @@
-version: "3.8"
+version: "3"
 
 services:
   frontend:
     build:
       context: ./docker/frontend
     ports:
-      - "3000:3000"
+      - 3000:3000
     stdin_open: true
     tty: true
     volumes:
       - ./frontend:/app
-      - node_modules:/app/node_modules
     working_dir: /app
   db:
     image: mysql:8.0
-    volumes:
-      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       - MYSQL_DATABASE=$DB_DATABASE
       - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
       - TZ='Asia/Tokyo'
     ports:
       - 3306:3306
+    volumes:
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
   nginx:
-    build:
-      context: ./docker/nginx
+    image: nginx:latest
     depends_on:
       - frontend
       - db
     ports:
-      - "80:80"
+      - 80:80
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./frontend/build:/usr/share/nginx/html
-
-volumes:
-  node_modules:
