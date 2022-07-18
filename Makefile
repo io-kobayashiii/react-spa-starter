@@ -11,8 +11,8 @@ nginx:
 	docker compose exec nginx bash
 db:
 	docker compose exec -it db bash
-destroy:
+remove:
 	docker compose down --rmi all --volumes --remove-orphans
 remake:
-	@make destroy
+	@make remove
 	@make up
